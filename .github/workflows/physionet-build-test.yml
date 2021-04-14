@@ -34,8 +34,8 @@ jobs:
           apt-get install libseccomp-dev
       - name: setup postgres
         run: |
-          psql -c "create user physionet with superuser password 'password';" -U postgres
-          psql -c "create database physionet;" -U postgres
+          psql -c "create user physionet with superuser password 'password';" -U postgres -h localhost
+          psql -c "create database physionet;" -U postgres -h localhost
       - name: install and setup wfdb
         run: |
           wget https://github.com/bemoody/wfdb/archive/10.6.2.tar.gz -O wfdb.tar.gz
