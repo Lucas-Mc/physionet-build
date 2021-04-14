@@ -75,10 +75,11 @@ jobs:
       - name: setup and test physionet 
         run: |
           cd physionet-django
-          python manage.py makemigrations --dry-run --no-input --check
-          python manage.py resetdb
-          python manage.py loaddemo
-          python manage.py test --verbosity=3 --keepdb
+          pip3 freeze
+          sudo python manage.py makemigrations --dry-run --no-input --check
+          sudo python manage.py resetdb
+          sudo python manage.py loaddemo
+          sudo python manage.py test --verbosity=3 --keepdb
       - name: check the amount of code being tested and print/report the result
         run: |
           coverage run --source='.' manage.py test --keepdb
