@@ -13,6 +13,19 @@ jobs:
   container:
     runs-on: ubuntu-latest
     container: debian:10
+
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: checkout physionet-build repo
         uses: actions/checkout@v2
@@ -34,8 +47,8 @@ jobs:
           apt-get install libseccomp-dev
       - name: setup postgres
         run: |
-          psql -c "create user physionet with superuser password 'password';" -U postgres -h localhost
-          psql -c "create database physionet;" -U postgres -h localhost
+          psql -c "create user physionet with superuser password 'password';" -U postgres
+          psql -c "create database physionet;" -U postgres
       - name: install and setup wfdb
         run: |
           wget https://github.com/bemoody/wfdb/archive/10.6.2.tar.gz -O wfdb.tar.gz
