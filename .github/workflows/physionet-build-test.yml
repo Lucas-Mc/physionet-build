@@ -36,10 +36,10 @@ jobs:
     steps:
       - name: checkout physionet-build repo
         uses: actions/checkout@v2
-      - name: set up python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.7'
+      #- name: set up python
+      #  uses: actions/setup-python@v2
+      #  with:
+      #    python-version: '3.7'
       - name: update packages
         run: |
           apt-get update --yes
