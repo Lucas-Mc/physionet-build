@@ -12,10 +12,11 @@ on:
 jobs:
   container:
     runs-on: ubuntu-latest
-    container: debian:10
+    container:
       image: debian:10
       volumes:
         - ~/physionet-build/:/physionet-django
+
     services:
       postgres:
         image: postgres:11.9
