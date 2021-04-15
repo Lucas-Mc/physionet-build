@@ -75,7 +75,7 @@ jobs:
       - name: setup and test physionet 
         run: |
           cd physionet-django
-          DJANGO_DIR="pip show Django | grep 'Location:' | cut -d ' ' -f2"
+          DJANGO_DIR=$(pip3 show Django | grep 'Location:' | cut -d ' ' -f2)
           echo "$DJANGO_DIR" >> $GITHUB_PATH
           echo "$DJANGO_DIR"
       - name: test
