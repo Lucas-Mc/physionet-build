@@ -76,9 +76,9 @@ jobs:
         run: |
           cd physionet-django
           DJANGO_DIR="$echo(pip show Django | grep 'Location:' | cut -d ' ' -f2)"
-          echo "$DJANGO_DIR"
-          export PATH="$PATH:$DJANGO_DIR"
-          source ~/.bashrc
+          echo "$DJANGO_DIR" >> $GITHUB_PATH
+          #export PATH="$PATH:$DJANGO_DIR"
+          #source ~/.bashrc
           python manage.py makemigrations --dry-run --no-input --check
           python manage.py resetdb
           python manage.py loaddemo
