@@ -15,7 +15,7 @@ jobs:
     container: debian:10
       image: debian:10
       volumes:
-        - ~/physionet-django/
+        - ~/physionet-build/:/physionet-django
     services:
       postgres:
         image: postgres:11.9
