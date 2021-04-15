@@ -12,10 +12,7 @@ on:
 jobs:
   container:
     runs-on: ubuntu-latest
-    container:
-      image: debian:10
-      volumes: 
-        - .:/app 
+    container: debian:10
 
     services:
       postgres:
@@ -83,6 +80,8 @@ jobs:
           ls
       - name: test
         run: |
+          docker-share mount -t
+          docker-compose up
           python manage.py makemigrations --dry-run --no-input --check
           python manage.py resetdb
           python manage.py loaddemo
