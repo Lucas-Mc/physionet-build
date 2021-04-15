@@ -45,7 +45,7 @@ jobs:
           apt-get update --yes
       - name: install and configure needed software
         run: |
-          apt-get install sudo build-essential postgresql zip wget --yes
+          apt-get install sudo python3-dev build-essential postgresql zip wget --yes
           service postgresql start
           ln -sT .env.example .env
       - name: install repo dependencies
