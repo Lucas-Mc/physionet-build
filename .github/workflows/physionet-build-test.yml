@@ -47,11 +47,10 @@ jobs:
         run: |
           apt-get install sudo build-essential postgresql zip wget --yes
           service postgresql start
-          #virtualenv -p python3.7 env3
-          #source env3/bin/activate
           ln -sT .env.example .env
       - name: install repo dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: install libseccomp-dev for syscall filtering
         run: |
