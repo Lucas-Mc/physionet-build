@@ -13,6 +13,8 @@ jobs:
   container:
     runs-on: ubuntu-latest
     container: debian:10
+    volumes: 
+      - .:/app 
 
     services:
       postgres:
