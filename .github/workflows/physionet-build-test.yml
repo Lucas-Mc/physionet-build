@@ -13,7 +13,9 @@ jobs:
   container:
     runs-on: ubuntu-latest
     container: debian:10
-
+      image: debian:10
+      volumes:
+        - ~/physionet-django/
     services:
       postgres:
         image: postgres:11.9
@@ -77,11 +79,9 @@ jobs:
           cd physionet-django
           DJANGO_DIR=$(pip3 show Django | grep 'Location:' | cut -d ' ' -f2)
           echo "$DJANGO_DIR" >> $GITHUB_PATH
-          ls
+          ls ~
       - name: test
         run: |
-          docker-share mount -t
-          docker-compose up
           python manage.py makemigrations --dry-run --no-input --check
           python manage.py resetdb
           python manage.py loaddemo
