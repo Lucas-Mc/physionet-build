@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: debian:10
-      volumes:
-        - ./physionet-build/:/physionet-django
+      #volumes:
+      #  - ./physionet-build/:/physionet-django
 
     services:
       postgres:
@@ -36,6 +36,10 @@ jobs:
     steps:
       - name: checkout physionet-build repo
         uses: actions/checkout@v2
+      - name: set up python
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
       - name: update packages
         run: |
           apt-get update --yes
@@ -74,12 +78,14 @@ jobs:
         run: |
           mkdir geckodriver
           tar -xf geckodriver-v0.23.0-linux64.tar.gz -C geckodriver
-          export PATH=$PATH:$PWD/geckodriver
+          #export PATH=$PATH:$PWD/geckodriver
+          echo "$PWD/geckodriver" >> GITHUB_PATH
       - name: setup and test physionet 
         run: |
           cd physionet-django
           DJANGO_DIR=$(pip3 show Django | grep 'Location:' | cut -d ' ' -f2)
           echo "$DJANGO_DIR" >> $GITHUB_PATH
+          ls .
           ls ~
       - name: test
         run: |
