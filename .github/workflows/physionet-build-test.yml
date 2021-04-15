@@ -77,7 +77,7 @@ jobs:
           cd physionet-django
           DJANGO_DIR=$(pip3 show Django | grep 'Location:' | cut -d ' ' -f2)
           echo "$DJANGO_DIR" >> $GITHUB_PATH
-          echo "$DJANGO_DIR"
+          ls
       - name: test
         run: |
           python manage.py makemigrations --dry-run --no-input --check
